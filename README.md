@@ -2,7 +2,7 @@
 > Nanoblocks allow to insert placeholders and inline decorators into Franklin documents.
 
 ## When is this useful?
-- I want to show a stock's value using its ticker.
+- I want to show the value of a market asset using its ticker.
 - I want to display weather for a named city.
 - I want to show a product's price by its SKU and plan.
 - I want to style links based on their type (like CTA).
