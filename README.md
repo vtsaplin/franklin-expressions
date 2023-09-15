@@ -19,7 +19,7 @@
 
 ## Usage
 - Create a nanoblock by calling `createNanoBlock` function with a name and a function that returns a string or a DOM element.
-- Render a nanoblock by calling `renderNanoBlocks` in your block's `decorate` function.
+- Render nanoblocks by calling `renderNanoBlocks` in your block's `decorate` function.
 
 ## Examples
 TBD
