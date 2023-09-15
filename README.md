@@ -82,3 +82,8 @@ createNanoBlock('cta', ({ parent, args }) => {
 | Document                                   | HTML                                                     |
 |--------------------------------------------|----------------------------------------------------------|
 | <img src="docs/source.png" alt="drawing"/> | <img src="docs/outcome.png" alt="drawing" width="300" /> |
+
+## Links
+
+- [Live demo](https://main--franklin-nanoblocks-demo--vtsaplin.hlx.page/)
+- [Demo project](https://github.com/vtsaplin/franklin-nanoblocks-demo)
