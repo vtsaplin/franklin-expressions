@@ -1,6 +1,6 @@
-const nanoblocks = new Map();
-
 const DEFAULT_REGEX = /{{\s*(\w+)\s*(?:,\s*([^}]+))?}}/g;
+
+const placeholders = new Map();
 
 let regex = DEFAULT_REGEX;
 
@@ -14,30 +14,30 @@ function getTextNodes(root) {
 }
 
 /**
- * Sets the current nano block regex
+ * Sets the current placeholder regex
  * @param newRegex
  */
-export function setNanoBlockRegex(newRegex) {
+export function setPlaceholderRegex(newRegex) {
   regex = newRegex;
 }
 
 /**
- * Creates a nano block
+ * Creates a placeholder
  * The renderer may return a valid HTMLElement, a string or undefined.
- * In the latter case, the nano block will not be rendered.
- * @param name The name of the block
+ * In the latter case, the placeholder will not be rendered.
+ * @param name The name of the placeholder
  * @param renderer The renderer function
  */
-export function createNanoBlock(name, renderer) {
-  nanoblocks.set(name.toLowerCase(), renderer);
+export function createPlaceholder(name, renderer) {
+  placeholders.set(name.toLowerCase(), renderer);
 }
 
 /**
- * Renders nano blocks
- * @param root The root element to search for nano blocks
+ * Renders placeholders
+ * @param root The root element to search for placeholders
  * @param context The data to pass to the renderer
  */
-export function renderNanoBlocks(root = document.body, context = undefined) {
+export function renderPlaceholders(root = document.body, context = undefined) {
   getTextNodes(root).forEach((textNode) => {
     const text = textNode.textContent;
     const matches = text.matchAll(regex);
@@ -55,7 +55,7 @@ export function renderNanoBlocks(root = document.body, context = undefined) {
         }
 
         const [name, args] = match.slice(1);
-        const renderer = nanoblocks.get(name.trim().toLowerCase());
+        const renderer = placeholders.get(name.trim().toLowerCase());
 
         if (renderer) {
           const result = renderer({
@@ -66,14 +66,14 @@ export function renderNanoBlocks(root = document.body, context = undefined) {
           });
 
           if (result instanceof HTMLElement) {
-            result.classList.add('nano-block', name);
+            result.classList.add('placeholder', name);
             parent.append(result);
           } else if (typeof result === 'string') {
             parent.append(document.createTextNode(result));
           }
         } else {
           // eslint-disable-next-line no-console
-          console.warn(`nano block ${name} not found`);
+          console.warn(`placeholder ${name} not found`);
         }
 
         lastIndex = match.index + match[0].length;

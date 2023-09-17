@@ -1,5 +1,5 @@
-# Franklin Nanoblocks
-> Nanoblocks let you add placeholders and decorators to Franklin documents.
+# Franklin Placeholders
+> Placeholders let you add dynamic content and inline decorators to Franklin documents.
 
 ## When this is useful
 - I want to show the value of a market asset using its ticker.
@@ -14,11 +14,11 @@
 - Tiny with no external dependencies.
 
 ## Installation
-- Copy `nanoblocks.js` to your project's `scripts` directory
+- Copy `placeholders.js` to your project's `scripts` directory
 
 ## Usage
-- Create a nanoblock by calling `createNanoBlock` with a name and a function returning a string or an element.
-- Render nanoblocks by calling `renderNanoBlocks` in your block's or card's `decorate` function.
+- Create a placeholder by calling `createPlaceholder` with a name and a function returning a string or an element.
+- Render placeholders by calling `renderPlaceholders` in your block's or card's `decorate` function.
 
 <img src="docs/diagram.png" alt="diagram" width="800"/>
 
@@ -36,7 +36,7 @@ async function fetchProductDetails() {
   });
 }
 
-createNanoBlock('price', ({ args }) => {
+createPlaceholder('price', ({args}) => {
   // get the sku and plan from the args
   const [sku, plan] = args.split(',');
 
@@ -58,16 +58,17 @@ createNanoBlock('price', ({ args }) => {
 ### Call-to-action button with popup
 
 The following code decorates a link as a CTA button that triggers a popup:
+
 ```js
-createNanoBlock('cta', ({ parent, args }) => {
-  
+createPlaceholder('cta', ({parent, args}) => {
+
   // get the first sibling that is a link
   const a = parent.nextElementSibling.querySelector('a');
   if (a === null) return;
-  
+
   // get the first argument
   const [popup] = args.split(',');
-  
+
   // style the link
   a.style.backgroundColor = 'red';
 
@@ -87,5 +88,5 @@ createNanoBlock('cta', ({ parent, args }) => {
 
 ## Links
 
-- [Live demo](https://main--franklin-nanoblocks-demo--vtsaplin.hlx.page/)
-- [Demo project](https://github.com/vtsaplin/franklin-nanoblocks-demo)
+- [Live demo](https://main--franklin-placeholders-demo--vtsaplin.hlx.page/)
+- [Demo project](https://github.com/vtsaplin/franklin-placeholders-demo)

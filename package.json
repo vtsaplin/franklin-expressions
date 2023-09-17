@@ -1,17 +1,19 @@
 {
-  "name": "nanoblocks",
+  "name": "franklin-placeholders",
   "version": "0.0.5",
   "type": "module",
-  "description": "Franklin Nanoblocks",
+  "description": "Franklin Placeholders",
   "scripts": {
     "test": "jest --env=jsdom --coverage",
     "lint": "eslint src/**/*.js"
   },
   "keywords": [
-    "nanoblock",
-    "franklin",
     "placeholder",
-    "decorator"
+    "inline decorator",
+    "adobe",
+    "helix",
+    "franklin",
+    "edge delivery services"
   ],
   "author": "Vitaly Tsaplin",
   "contributors": [
@@ -22,7 +24,7 @@
     "@babel/preset-env": "7.22.15",
     "@babel/eslint-parser": "7.19.1",
     "babel-jest": "29.7.0",
-    "eslint": "^8.49.0",
+    "eslint": "8.49.0",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "eslint-config-airbnb-base": "15.0.0",
