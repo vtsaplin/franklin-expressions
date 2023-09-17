@@ -1,7 +1,12 @@
 # Franklin Placeholders
-> Placeholders let you add dynamic content and inline decorators to Franklin documents.
+> Placeholders allow users to transform Franklin documents into templates by adding simple expressions with parameters.
+> These expressions then become HTML elements that display dynamically fetched content.
+> It is also possible to use placeholders as decorators, styling and augmenting content around the insertion point. 
+> This turns placeholders into reusable fragments that can be placed inside Franklin blocks.
 
-## When this is useful
+<img src="docs/diagram.png" alt="diagram" width="800"/>
+
+## When is this is useful?
 - I want to show the value of a market asset using its ticker.
 - I want to show a product's price by its SKU and plan.
 - I want to style links based on their type (like CTA).
@@ -13,14 +18,10 @@
 - Allows to use composition and nesting inside Franklin blocks.
 - Tiny with no external dependencies.
 
-## Installation
-- Copy `placeholders.js` to your project's `scripts` directory
-
 ## Usage
+- Copy `placeholders.js` to your project's `scripts` directory
 - Create a placeholder by calling `createPlaceholder` with a name and a function returning a string or an element.
 - Render placeholders by calling `renderPlaceholders` in your block's or card's `decorate` function.
-
-<img src="docs/diagram.png" alt="diagram" width="800"/>
 
 ## Examples
 
