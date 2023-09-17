@@ -88,5 +88,5 @@ createPlaceholder('cta', ({parent, args}) => {
 
 ## Links
 
-- [Live demo](https://main--franklin-placeholders-demo--vtsaplin.hlx.page/)
-- [Demo project](https://github.com/vtsaplin/franklin-placeholders-demo)
+- [Live demo](https://main--franklin-placeholders-website--vtsaplin.hlx.page/)
+- [Demo project](https://github.com/vtsaplin/franklin-placeholders-website)
