@@ -1,8 +1,10 @@
 # Franklin Placeholders
-> Placeholders allow users to transform Franklin documents into templates by adding simple expressions with parameters.
-> These expressions then become HTML elements that display dynamically fetched content.
-> It is also possible to use placeholders as decorators, styling and augmenting content around the insertion point. 
-> This turns placeholders into reusable fragments that can be placed inside Franklin blocks.
+> Turn documents into dynamic templates with expressions.
+
+Placeholders allow users to transform Franklin documents into templates by adding simple expressions with parameters.
+These expressions then become HTML elements that display dynamically fetched content.
+It is also possible to use placeholders as decorators to style and augment content around the insertion point. 
+This turns placeholders into reusable fragments that can be placed inside top level Franklin blocks.
 
 <img src="docs/diagram.png" alt="diagram" width="800"/>
 
