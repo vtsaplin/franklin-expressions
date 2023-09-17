@@ -1,6 +1,6 @@
 const nanoblocks = new Map();
 
-const DEFAULT_REGEX = /@@(\w+)(?:\(([^)]*)\))?/g;
+const DEFAULT_REGEX = /{{\s*(\w+)\s*(?:,\s*([^}]+))?}}/g;
 
 let regex = DEFAULT_REGEX;
 
