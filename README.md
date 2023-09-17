@@ -18,7 +18,7 @@
 
 ## Usage
 - Create a nanoblock by calling `createNanoBlock` with a name and a function returning a string or an element.
-- Render nanoblocks by calling `renderNanoBlocks` in your block's `decorate` function.
+- Render nanoblocks by calling `renderNanoBlocks` in your block's or card's `decorate` function.
 
 <img src="docs/diagram.png" alt="diagram" width="800"/>
 
