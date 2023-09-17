@@ -1,6 +1,8 @@
 const nanoblocks = new Map();
 
-const REGEX = /@@(\w+)(?:\(([^)]*)\))?/g;
+const DEFAULT_REGEX = /@@(\w+)(?:\(([^)]*)\))?/g;
+
+let regex = DEFAULT_REGEX;
 
 function getTextNodes(root) {
   const all = [];
@@ -9,6 +11,14 @@ function getTextNodes(root) {
     else all.push(...getTextNodes(node));
   }
   return all;
+}
+
+/**
+ * Sets the current nano block regex
+ * @param newRegex
+ */
+export function setNanoBlockRegex(newRegex) {
+  regex = newRegex;
 }
 
 /**
@@ -30,7 +40,7 @@ export function createNanoBlock(name, renderer) {
 export function renderNanoBlocks(root = document.body, context = undefined) {
   getTextNodes(root).forEach((textNode) => {
     const text = textNode.textContent;
-    const matches = text.matchAll(REGEX);
+    const matches = text.matchAll(regex);
 
     if (matches) {
       const parent = textNode.parentNode;
@@ -45,14 +55,14 @@ export function renderNanoBlocks(root = document.body, context = undefined) {
         }
 
         const [name, args] = match.slice(1);
-        const renderer = nanoblocks.get(name.toLowerCase());
+        const renderer = nanoblocks.get(name.trim().toLowerCase());
 
         if (renderer) {
           const result = renderer({
             parent,
             root,
             context,
-            args,
+            args: args?.trim(),
           });
 
           if (result instanceof HTMLElement) {

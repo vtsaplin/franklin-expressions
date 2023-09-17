@@ -1,4 +1,8 @@
-import { createNanoBlock, renderNanoBlocks } from './nanoblocks.js';
+import {
+  createNanoBlock,
+  renderNanoBlocks,
+  setNanoBlockRegex,
+} from './nanoblocks.js';
 
 function fromHtml(html) {
   return document.createRange().createContextualFragment(html).firstChild;
@@ -63,5 +67,17 @@ describe('renderNanoBlocks', () => {
     const root = fromHtml('<div>text1 @@nb1 text2</div>');
     renderNanoBlocks(root, 'text');
     expect(root.outerHTML).toBe('<div>text1 text text2</div>');
+  });
+
+  test('uses custom regex', () => {
+    const fn = jest.fn();
+    createNanoBlock('nb1', fn);
+    createNanoBlock('nb2', fn);
+    const root = fromHtml('<div>text1 {{nb1, arg1, arg2}} test2 {{nb2, arg1}} text3</div>');
+    setNanoBlockRegex(/{{(\w+)\s*,\s*([^}]+)}}/g);
+    renderNanoBlocks(root);
+    expect(fn).toHaveBeenCalledTimes(2);
+    expect(fn).toHaveBeenNthCalledWith(1, expect.objectContaining({ args: 'arg1, arg2' }));
+    expect(fn).toHaveBeenNthCalledWith(2, expect.objectContaining({ args: 'arg1' }));
   });
 });
