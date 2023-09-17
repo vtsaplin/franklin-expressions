@@ -20,6 +20,8 @@
 - Create a nanoblock by calling `createNanoBlock` function with a name and a function that returns a string or a DOM element.
 - Render nanoblocks by calling `renderNanoBlocks` in your block's `decorate` function.
 
+<img src="docs/diagram.png" alt="diagram" width="800"/>
+
 ## Examples
 
 ### Dynamic price by SKU and plan
@@ -81,7 +83,7 @@ createNanoBlock('cta', ({ parent, args }) => {
 
 | Document                                   | HTML                                                     |
 |--------------------------------------------|----------------------------------------------------------|
-| <img src="docs/source.png" alt="drawing"/> | <img src="docs/outcome.png" alt="drawing" width="300" /> |
+| <img src="docs/source.png" alt="drawing"/> | <img src="docs/outcome.png" alt="drawing" width="350" /> |
 
 ## Links
 
