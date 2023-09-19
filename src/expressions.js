@@ -22,10 +22,10 @@ export function setExpressionRegex(newRegex) {
 }
 
 /**
- * Creates a placeholder
+ * Creates an expression
  * The renderer may return a valid HTMLElement, a string or undefined.
- * In the latter case, the placeholder will not be rendered.
- * @param name The name of the placeholder
+ * In the latter case, nothing will be rendered.
+ * @param name The name of the expression
  * @param renderer The renderer function
  */
 export function createExpression(name, renderer) {
@@ -33,8 +33,8 @@ export function createExpression(name, renderer) {
 }
 
 /**
- * Renders placeholders
- * @param root The root element to search for placeholders
+ * Renders expressions
+ * @param root The root element to search for expressions
  * @param context The data to pass to the renderer
  */
 export function renderExpressions(root = document.body, context = undefined) {
@@ -74,7 +74,7 @@ export function renderExpressions(root = document.body, context = undefined) {
           }
         } else {
           // eslint-disable-next-line no-console
-          console.warn(`placeholder ${name} not found`);
+          console.warn(`expression ${name} not found`);
         }
 
         lastIndex = match.index + match[0].length;

@@ -16,8 +16,8 @@ This turns expressions into reusable fragments that can be placed inside top lev
 - I want to use composition and nesting inside Franklin blocks.
 
 ## Features
-- Allows to insert placeholders and inline decorators into Franklin documents.
-- Allows to use composition and nesting inside Franklin blocks.
+- Allows to insert dynamically computed values into Franklin documents.
+- Allows to decorate content around the insertion point.
 - Tiny with no external dependencies.
 
 ## Usage
