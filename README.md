@@ -27,6 +27,21 @@ This turns expressions into reusable fragments that can be placed inside top lev
 
 ## Examples
 
+### Basic expression
+
+The code below computes the sum of two numbers:
+
+```js
+createExpression('sum', ({ args }) => {
+  
+  // get the numbers from the args
+  const [a, b] = args.split(',');
+
+  // compute the sum and return it as a string
+  return `${parseInt(a) + parseInt(b)}`;
+});
+```
+
 ### Dynamic price by SKU and plan
 
 The code below fetches the price of a product by its SKU and plan and renders it as a span:
@@ -40,6 +55,7 @@ async function fetchProductDetails() {
 }
 
 createExpression('price', ({ args }) => {
+  
   // get the sku and plan from the args
   const [sku, plan] = args.split(',');
 
@@ -64,10 +80,7 @@ createExpression('price', ({ args }) => {
 The following code decorates a link as a CTA button that triggers a popup:
 
 ```js
-createExpression('cta', ({
-  parent,
-  args
-}) => {
+createExpression('cta', ({ parent, args }) => {
 
   // get the first sibling that is a link
   const a = parent.nextElementSibling.querySelector('a');
