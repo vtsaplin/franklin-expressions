@@ -1,10 +1,10 @@
-# Franklin Placeholders
+# Franklin Expressions
 > Turn documents into dynamic templates with expressions.
 
-Placeholders allow users to transform Franklin documents into templates by adding simple expressions with parameters.
+Expressions allow users to transform Franklin documents into templates by adding simple expressions with parameters.
 These expressions then become HTML elements that display dynamically fetched content.
-It is also possible to use placeholders as decorators to style and augment content around the insertion point. 
-This turns placeholders into reusable fragments that can be placed inside top level Franklin blocks.
+It is also possible to use expressions as decorators to style and augment content around the insertion point. 
+This turns expressions into reusable fragments that can be placed inside top level Franklin blocks.
 
 <img src="docs/diagram.png" alt="diagram" width="800"/>
 
@@ -21,9 +21,9 @@ This turns placeholders into reusable fragments that can be placed inside top le
 - Tiny with no external dependencies.
 
 ## Usage
-- Copy `placeholders.js` to your project's `scripts` directory
-- Create a placeholder by calling `createPlaceholder` with a name and a function returning a string or an element.
-- Render placeholders by calling `renderPlaceholders` in your block's or card's `decorate` function.
+- Copy `expressions.js` to your project's `scripts` directory
+- Create an expression by calling `createExpression` with a name and a function returning a string or an element.
+- Render expressions by calling `renderExpressions` in your block's or card's `decorate` function.
 
 ## Examples
 
@@ -39,7 +39,7 @@ async function fetchProductDetails() {
   });
 }
 
-createPlaceholder('price', ({args}) => {
+createExpression('price', ({ args }) => {
   // get the sku and plan from the args
   const [sku, plan] = args.split(',');
 
@@ -47,9 +47,10 @@ createPlaceholder('price', ({args}) => {
   const el = document.createElement('span');
 
   // fetch the price
-  fetchProductDetails(sku, plan).then((price) => {
-    el.innerText = `$${price}`;
-  });
+  fetchProductDetails(sku, plan)
+    .then((price) => {
+      el.innerText = `$${price}`;
+    });
 
   // crete a value placeholder for the price (CLS friendly)
   el.innerText = 'loading...';
@@ -63,7 +64,10 @@ createPlaceholder('price', ({args}) => {
 The following code decorates a link as a CTA button that triggers a popup:
 
 ```js
-createPlaceholder('cta', ({parent, args}) => {
+createExpression('cta', ({
+  parent,
+  args
+}) => {
 
   // get the first sibling that is a link
   const a = parent.nextElementSibling.querySelector('a');
@@ -91,5 +95,5 @@ createPlaceholder('cta', ({parent, args}) => {
 
 ## Links
 
-- [Live demo](https://main--franklin-placeholders-website--vtsaplin.hlx.page/)
-- [Demo project](https://github.com/vtsaplin/franklin-placeholders-website)
+- [Live demo](https://main--franklin-expressions-website--vtsaplin.hlx.page/)
+- [Demo project](https://github.com/vtsaplin/franklin-expressions-website)

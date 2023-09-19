@@ -1,15 +1,16 @@
 {
-  "name": "franklin-placeholders",
+  "name": "franklin-expressions",
   "version": "0.0.5",
   "type": "module",
-  "description": "Franklin Placeholders",
+  "description": "Franklin Expressions",
   "scripts": {
     "test": "jest --env=jsdom --coverage",
     "lint": "eslint src/**/*.js"
   },
   "keywords": [
-    "placeholder",
-    "inline decorator",
+    "expressions",
+    "decorators",
+    "placeholders",
     "adobe",
     "helix",
     "franklin",

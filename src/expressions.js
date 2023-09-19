@@ -1,6 +1,6 @@
 const DEFAULT_REGEX = /{{\s*(\w+)\s*(?:,\s*([^}]+))?}}/g;
 
-const placeholders = new Map();
+const expressions = new Map();
 
 let regex = DEFAULT_REGEX;
 
@@ -14,10 +14,10 @@ function getTextNodes(root) {
 }
 
 /**
- * Sets the current placeholder regex
+ * Sets the current expression regex
  * @param newRegex
  */
-export function setPlaceholderRegex(newRegex) {
+export function setExpressionRegex(newRegex) {
   regex = newRegex;
 }
 
@@ -28,8 +28,8 @@ export function setPlaceholderRegex(newRegex) {
  * @param name The name of the placeholder
  * @param renderer The renderer function
  */
-export function createPlaceholder(name, renderer) {
-  placeholders.set(name.toLowerCase(), renderer);
+export function createExpression(name, renderer) {
+  expressions.set(name.toLowerCase(), renderer);
 }
 
 /**
@@ -37,7 +37,7 @@ export function createPlaceholder(name, renderer) {
  * @param root The root element to search for placeholders
  * @param context The data to pass to the renderer
  */
-export function renderPlaceholders(root = document.body, context = undefined) {
+export function renderExpressions(root = document.body, context = undefined) {
   getTextNodes(root).forEach((textNode) => {
     const text = textNode.textContent;
     const matches = text.matchAll(regex);
@@ -55,7 +55,7 @@ export function renderPlaceholders(root = document.body, context = undefined) {
         }
 
         const [name, args] = match.slice(1);
-        const renderer = placeholders.get(name.trim().toLowerCase());
+        const renderer = expressions.get(name.trim().toLowerCase());
 
         if (renderer) {
           const result = renderer({
