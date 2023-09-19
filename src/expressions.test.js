@@ -8,49 +8,54 @@ function fromHtml(html) {
   return document.createRange().createContextualFragment(html).firstChild;
 }
 
-describe('renderPlaceholders', () => {
-  test('renders placeholders with no arguments', () => {
+describe('renderExpressions', () => {
+  test('renders expressions with no arguments', () => {
     createExpression('p1', () => fromHtml('<span>text</span>'));
     const root = fromHtml('<div>text1 {{p1}} text2</div>');
     renderExpressions(root);
-    expect(root.innerHTML).toBe('text1 <span class="placeholder p1">text</span> text2');
+    expect(root.innerHTML).toBe('text1 <span class="p1">text</span> text2');
   });
 
-  test('renders placeholders with arguments', () => {
+  test('renders expressions with arguments', () => {
     createExpression('p1', ({ args }) => fromHtml(`<span>${args}</span>`));
     const root = fromHtml('<div>text1 {{p1, arg1, arg2}} text2</div>');
     renderExpressions(root);
-    expect(root.innerHTML).toBe('text1 <span class="placeholder p1">arg1, arg2</span> text2');
+    expect(root.innerHTML).toBe('text1 <span class="p1">arg1, arg2</span> text2');
   });
 
-  test('renders multiple placeholders in a single text node', () => {
+  test('renders multiple expressions in a single text node', () => {
     createExpression('p1', () => fromHtml('<span>1</span>'));
     createExpression('p2', () => fromHtml('<span>2</span>'));
     const root = fromHtml('<div>text1 {{p1}} text {{p2}} text2</div>');
     renderExpressions(root);
-    expect(root.innerHTML).toBe('text1 <span class="placeholder p1">1</span> text <span class="placeholder p2">2</span> text2');
+    expect(root.innerHTML).toBe('text1 <span class="p1">1</span> text <span class="p2">2</span> text2');
   });
 
-  test('renders placeholders as text', () => {
+  test('renders expressions as text', () => {
     createExpression('p1', () => 'text');
     const root = fromHtml('<div>text1 {{p1}} text2</div>');
     renderExpressions(root);
     expect(root.innerHTML).toBe('text1 text text2');
   });
 
-  test('ignores missing placeholders', () => {
+  test('ignores missing expressions', () => {
     const root = fromHtml('<div>text1 {{missing}} text2</div>');
     renderExpressions(root);
     expect(root.innerHTML).toBe('text1  text2');
   });
 
-  test('injects root node', () => {
-    createExpression('p1', ({ root, args }) => {
-      root.style.color = args;
+  test('passes all arguments to callbacks', () => {
+    const callback = jest.fn();
+    createExpression('p1', callback);
+    const root = fromHtml('<div><div>text1 {{p1, arg1}} text2</div></div>');
+    renderExpressions(root, { context: 'context' });
+    expect(callback).toHaveBeenCalledWith({
+      name: 'p1',
+      parent: root.firstElementChild,
+      root,
+      context: { context: 'context' },
+      args: 'arg1',
     });
-    const root = fromHtml('<div>text1 {{p1, red}} text2</div>');
-    renderExpressions(root);
-    expect(root.outerHTML).toBe('<div style="color: red;">text1  text2</div>');
   });
 
   test('injects parent node', () => {
@@ -70,14 +75,14 @@ describe('renderPlaceholders', () => {
   });
 
   test('uses custom regex', () => {
-    const fn = jest.fn();
-    createExpression('p1', fn);
-    createExpression('p2', fn);
+    const callback = jest.fn();
+    createExpression('p1', callback);
+    createExpression('p2', callback);
     const root = fromHtml('<div>text1 @@p1(arg1, arg2) test2 @@p2(arg1) text3</div>');
     setExpressionRegex(/@@(\w+)(?:\(([^)]*)\))?/g);
     renderExpressions(root);
-    expect(fn).toHaveBeenCalledTimes(2);
-    expect(fn).toHaveBeenNthCalledWith(1, expect.objectContaining({ args: 'arg1, arg2' }));
-    expect(fn).toHaveBeenNthCalledWith(2, expect.objectContaining({ args: 'arg1' }));
+    expect(callback).toHaveBeenCalledTimes(2);
+    expect(callback).toHaveBeenNthCalledWith(1, expect.objectContaining({ args: 'arg1, arg2' }));
+    expect(callback).toHaveBeenNthCalledWith(2, expect.objectContaining({ args: 'arg1' }));
   });
 });

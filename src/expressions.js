@@ -59,6 +59,7 @@ export function renderExpressions(root = document.body, context = undefined) {
 
         if (renderer) {
           const result = renderer({
+            name,
             parent,
             root,
             context,
@@ -66,7 +67,7 @@ export function renderExpressions(root = document.body, context = undefined) {
           });
 
           if (result instanceof HTMLElement) {
-            result.classList.add('placeholder', name);
+            result.classList.add(name);
             parent.append(result);
           } else if (typeof result === 'string') {
             parent.append(document.createTextNode(result));
