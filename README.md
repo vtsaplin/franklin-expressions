@@ -1,4 +1,4 @@
-# Franklin Expressions
+# AEM Expressions
 > Turn documents into dynamic templates with expressions.
 
 Expressions allow users to transform Franklin documents into templates by adding simple expressions with parameters.
